@@ -5,9 +5,10 @@
 // 定义callback function类型
 typedef int (*exampleCallback)(char *);
 
-// 
+// 声明函数指针变量 examplecb, 指向 NULL
 static exampleCallback examplecb = NULL;
 
+// 实现回调函数, 输出 Hello World
 static
 int showHelloworld(char * name)
 {
@@ -27,7 +28,9 @@ void bsp_show(int time, char *name)
 
         if ((time == 0) && examplecb)
         {
+            // 调用回调函数
             examplecb(name); 
+            // 清空回调函数
             examplecb = NULL;
         }
     }
@@ -39,7 +42,7 @@ int main(int argc, char *argv[])
         printf("Usage: %s base exponent \n", argv[0]);
         return 1;
     }
-    
+
     int timeout = atoi(argv[1]);
     char * name = argv[2];
 
